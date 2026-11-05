@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Envelope } from "./Envelope";
-import { Gallery } from "./Gallery";
+// import { Gallery } from "./Gallery";
 import { LixiLoop } from "./LixiLoop";
 import { GoldRule, Monogram } from "./Ornaments";
 import { Petals } from "./Petals";
@@ -24,7 +24,7 @@ import { ScrollEffects } from "./ScrollEffects";
 const NAV = [
   { id: "couple", vi: "Cặp đôi", en: "Couple" },
   { id: "events", vi: "Lịch", en: "Schedule" },
-  { id: "album", vi: "Album", en: "Album" },
+  // { id: "album", vi: "Album", en: "Album" },
   { id: "rsvp", vi: "RSVP", en: "RSVP" },
 ];
 
@@ -53,7 +53,7 @@ export function Invitation() {
   const [guestName, setGuestName] = useState("");
   const [ready, setReady] = useState(false);
   const [musicOn, setMusicOn] = useState(false);
-  const [activePhoto, setActivePhoto] = useState<number | null>(null);
+  // const [activePhoto, setActivePhoto] = useState<number | null>(null);
   const music = useRef<MusicBox | null>(null);
   const copy = wedding.copy[lang];
   const count = useCountdown(wedding.dateISO);
@@ -72,8 +72,12 @@ export function Invitation() {
 
   useEffect(() => {
     const to = new URLSearchParams(window.location.search).get("to") ?? "";
-    setGuestName(to);
-    setReady(true);
+    setTimeout(() => {
+      setGuestName(to);
+    }, 1000);
+    setTimeout(() => {
+      setReady(true);
+    }, 2000);
     music.current = createMusicBox();
     return () => {
       void music.current?.dispose();
@@ -187,7 +191,10 @@ export function Invitation() {
         ))}
       </nav>
 
-      <section data-scene className="snap-scene relative h-dvh overflow-hidden bg-ivory">
+      <section
+        data-scene
+        className="snap-scene relative h-dvh overflow-hidden bg-ivory"
+      >
         <Image
           src={wedding.images.hero}
           alt=""
@@ -196,7 +203,10 @@ export function Invitation() {
           sizes="100vw"
           className="hero-zoom z-0 object-cover object-top"
         />
-        <div className="hero-scrim pointer-events-none absolute inset-0 z-[1]" aria-hidden="true" />
+        <div
+          className="hero-scrim pointer-events-none absolute inset-0 z-[1]"
+          aria-hidden="true"
+        />
         <div className="hero-copy-out relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
           <p className="hero-kicker hero-gold font-sans text-sm font-medium tracking-[0.36em] uppercase md:text-base">
             {copy.saveTheDate}
@@ -251,10 +261,26 @@ export function Invitation() {
       <LixiLoop copy={copy} />
 
       {[
-        { id: "couple", person: copy.groom, src: wedding.images.groom, pos: "object-[50%_25%]" },
-        { id: undefined, person: copy.bride, src: wedding.images.bride, pos: "object-[50%_35%]" },
+        {
+          id: "couple",
+          person: copy.groom,
+          src: wedding.images.groom,
+          pos: "object-[50%_25%]",
+        },
+        {
+          id: undefined,
+          person: copy.bride,
+          src: wedding.images.bride,
+          pos: "object-[50%_35%]",
+        },
       ].map(({ id, person, src, pos }, i) => (
-        <Scene key={person.name} id={id} src={src} position={pos} flip={i === 1}>
+        <Scene
+          key={person.name}
+          id={id}
+          src={src}
+          position={pos}
+          flip={i === 1}
+        >
           <p className="font-sans text-xs tracking-[0.34em] text-gold-bright uppercase">
             {person.role}
           </p>
@@ -264,11 +290,17 @@ export function Invitation() {
           {person.parents ? (
             <p className="mt-3 text-sm text-ivory/70">{person.parents}</p>
           ) : null}
-          <p className="mt-5 max-w-md text-lg leading-7 text-ivory/90">{person.bio}</p>
+          <p className="mt-5 max-w-md text-lg leading-7 text-ivory/90">
+            {person.bio}
+          </p>
         </Scene>
       ))}
 
-      <Scene id="events" src={wedding.images.events} position="object-[60%_30%]">
+      <Scene
+        id="events"
+        src={wedding.images.events}
+        position="object-[60%_30%]"
+      >
         <p className="font-sans text-xs tracking-[0.38em] text-gold-bright uppercase">
           {copy.eventsEyebrow}
         </p>
@@ -287,7 +319,9 @@ export function Invitation() {
           <h2 className="font-sans text-xs tracking-[0.3em] text-gold-bright uppercase">
             {copy.event.title}
           </h2>
-          <p className="mt-2 font-serif text-2xl md:text-4xl">{copy.event.place}</p>
+          <p className="mt-2 font-serif text-2xl md:text-4xl">
+            {copy.event.place}
+          </p>
           <p className="mt-1 text-ivory/80">{copy.event.address}</p>
         </div>
         <a
@@ -328,7 +362,10 @@ export function Invitation() {
               className="rounded-lg border border-gold/50 bg-night/70 px-1 py-3 text-center backdrop-blur-sm"
             >
               <p className="font-sans text-3xl leading-none font-medium text-gold-bright md:text-5xl">
-                <span key={String(value)} className="tick inline-block tabular-nums">
+                <span
+                  key={String(value)}
+                  className="tick inline-block tabular-nums"
+                >
                   {String(value).padStart(2, "0")}
                 </span>
               </p>
@@ -348,12 +385,14 @@ export function Invitation() {
         </button>
       </Scene>
 
+      {/* Album slide — bỏ comment block dưới khi cần hiển thị lại
       <Gallery
         copy={copy}
         lang={lang}
         active={activePhoto}
         setActive={setActivePhoto}
       />
+      */}
       <RsvpBoard copy={copy} guestName={guestName} />
 
       <footer className="snap-scene relative flex min-h-dvh flex-col justify-center overflow-hidden bg-night px-5 py-28 text-center">
