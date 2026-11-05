@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { wedding, type WeddingCopy } from "@/data/wedding";
+import Image from "next/image";
 import { CornerFlourish, GoldRule, Monogram, WaxSeal } from "./Ornaments";
 import { Sparkles } from "./Sparkles";
 
@@ -21,17 +21,15 @@ const CORNERS = [
 
 export function Envelope({ copy, guestName, isOpen, onOpen }: EnvelopeProps) {
   return (
-    <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-x-hidden overflow-y-auto bg-night px-4 py-14 text-ivory">
-      {/* same photo language as the slides inside, kept dark so the gold reads */}
+    <div className="relative flex min-h-dvh flex-col items-center overflow-x-hidden overflow-y-auto px-4 pb-14 pt-6 text-ivory sm:pt-8">
       <Image
         src={wedding.images.hero}
         alt=""
         fill
         priority
         sizes="100vw"
-        className="object-cover object-top opacity-45"
+        className="object-cover object-top"
       />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(26,10,18,0.8)_0%,rgba(26,10,18,0.55)_38%,rgba(26,10,18,0.95)_100%),radial-gradient(520px_360px_at_50%_48%,rgba(232,196,122,0.2),transparent_70%)]" />
       <Sparkles />
 
       {/* thin gold double frame + corner flourishes */}
@@ -44,19 +42,21 @@ export function Envelope({ copy, guestName, isOpen, onOpen }: EnvelopeProps) {
         />
       ))}
 
-      <div className="relative z-10 flex flex-col items-center">
-        <Monogram className="h-16 w-16 text-gold-bright" />
-        <p className="mt-5 font-sans text-[11px] tracking-[0.42em] text-gold-bright uppercase">
+      <header className="relative z-10 flex w-full max-w-lg flex-col items-center pt-2 text-center">
+        <Monogram className="h-14 w-14 text-gold-bright sm:h-16 sm:w-16" />
+        <p className="mt-3 font-sans text-[11px] tracking-[0.42em] text-gold-bright uppercase">
           {copy.envelopeKicker}
         </p>
-        <GoldRule className="mt-4 mb-8 w-24" />
+        <GoldRule className="mt-3 w-24" />
+      </header>
 
+      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-center py-6 sm:py-8">
         <div className="envelope-scene">
           <div
             className={`envelope relative mx-auto shadow-[0_30px_60px_rgba(0,0,0,0.55)] ring-1 ring-gold/60 ${isOpen ? "is-open" : ""}`}
           >
             <div
-              className="absolute inset-0 overflow-hidden rounded-[3px] bg-[#f2a7b6] bg-cover bg-center [container-type:inline-size]"
+              className="absolute inset-0 overflow-hidden rounded-[3px] bg-cover bg-center [container-type:inline-size]"
               style={{ backgroundImage: "url(/lixi/thiep.jpg)" }}
             >
               {/* sits in the empty centre of the artwork; sizes follow the card width */}
@@ -117,7 +117,7 @@ export function Envelope({ copy, guestName, isOpen, onOpen }: EnvelopeProps) {
           </div>
         </div>
 
-        <p className="mt-10 font-sans text-[10px] tracking-[0.4em] text-gold-bright/80 uppercase">
+        <p className="mt-8 font-sans text-[10px] tracking-[0.4em] text-gold-bright/80 uppercase sm:mt-10">
           {copy.envelopeInvite}
         </p>
         <p className="mt-2 min-h-[2.25rem] font-serif text-2xl text-ivory italic sm:text-3xl">
