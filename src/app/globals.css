@@ -836,6 +836,30 @@ button {
   border-color: #fda4af;
 }
 
+.field-light {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1rem;
+  color: var(--color-ink);
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.field-light:focus {
+  outline: none;
+  border-color: var(--color-gold-deep);
+  background: #fff;
+}
+
+.field-light[aria-invalid="true"] {
+  border-color: var(--color-burgundy);
+}
+
 .field-input[aria-invalid="true"] {
   border-bottom-color: var(--color-burgundy);
 }

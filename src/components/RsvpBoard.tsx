@@ -1,9 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import Image from "next/image";
 import { CheckCircle } from "@phosphor-icons/react";
-import { wedding, type WeddingCopy } from "@/data/wedding";
+import { type WeddingCopy } from "@/data/wedding";
 import { loadRsvp, saveRsvp, validateRsvp, type RsvpRecord } from "@/lib/guest-store";
 
 type Props = {
@@ -71,65 +70,54 @@ export function RsvpBoard({ copy, guestName }: Props) {
     <section
       id="rsvp"
       data-scene
-      className="snap-scene relative flex min-h-dvh items-center overflow-hidden bg-night px-5 py-16 md:px-10"
+      className="paper snap-scene relative flex min-h-dvh items-center overflow-hidden px-5 py-16 md:px-10"
     >
-      <div className="scene-photo absolute inset-0">
-        <Image
-          src={wedding.images.night}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-top opacity-40"
-        />
-      </div>
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(26,10,18,0.9)_0%,rgba(26,10,18,0.7)_45%,rgba(26,10,18,0.96)_100%),radial-gradient(640px_420px_at_75%_55%,rgba(219,39,119,0.22),transparent_65%)]" />
-
       <div className="relative z-10 mx-auto grid w-full max-w-5xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="scene-text text-center lg:text-left">
-          <p className="font-sans text-xs tracking-[0.38em] text-gold-bright uppercase">
+          <p className="font-sans text-xs tracking-[0.38em] text-gold-deep uppercase">
             {copy.rsvpEyebrow}
           </p>
-          <h2 className="mt-3 font-serif text-4xl text-ivory md:text-6xl">{copy.rsvpTitle}</h2>
-          <p className="mx-auto mt-5 max-w-md text-base leading-7 text-ivory/80 md:text-lg lg:mx-0">
+          <h2 className="mt-3 font-serif text-4xl text-ink md:text-6xl">{copy.rsvpTitle}</h2>
+          <p className="mx-auto mt-5 max-w-md text-base leading-7 text-ink-soft md:text-lg lg:mx-0">
             {copy.rsvpBody}
           </p>
         </div>
 
         <div
           data-reveal
-          className="rounded-2xl border border-gold/30 bg-night/70 p-6 shadow-[0_30px_70px_rgba(0,0,0,0.5)] backdrop-blur-md md:p-8"
+          className="rounded-2xl border border-gold/35 bg-white/85 p-6 shadow-[0_24px_60px_rgba(42,18,24,0.08)] backdrop-blur-sm md:p-8"
         >
           {rsvp ? (
             <div className="flex flex-col items-center gap-4 py-8 text-center">
-              <CheckCircle size={44} weight="light" className="text-gold-bright" aria-hidden="true" />
-              <p className="font-serif text-2xl text-ivory italic">{copy.rsvpSaved}</p>
+              <CheckCircle size={44} weight="light" className="text-gold-deep" aria-hidden="true" />
+              <p className="font-serif text-2xl text-ink italic">{copy.rsvpSaved}</p>
             </div>
           ) : (
             <form className="space-y-6" onSubmit={onRsvp} noValidate>
               <div>
-                <label htmlFor="name" className="font-sans text-[11px] tracking-[0.22em] text-gold-bright/80 uppercase">
+                <label htmlFor="name" className="font-sans text-[11px] tracking-[0.22em] text-gold-deep uppercase">
                   {copy.rsvpName}
                 </label>
                 <input
                   id="name"
                   name="name"
                   defaultValue={guestName}
-                  className="field-dark"
+                  className="field-light"
                   autoComplete="name"
                   aria-invalid={Boolean(rsvpErrors.name)}
                 />
                 {rsvpErrors.name ? (
-                  <p className="mt-1 text-sm text-rose-300">{errorCopy.name(copy)}</p>
+                  <p className="mt-1 text-sm text-burgundy">{errorCopy.name(copy)}</p>
                 ) : null}
               </div>
 
               <fieldset>
-                <legend className="font-sans text-[11px] tracking-[0.22em] text-gold-bright/80 uppercase">{copy.rsvpAttendance}</legend>
+                <legend className="font-sans text-[11px] tracking-[0.22em] text-gold-deep uppercase">{copy.rsvpAttendance}</legend>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {(["yes", "no"] as const).map((value) => (
                     <label
                       key={value}
-                      className="flex cursor-pointer items-center gap-3 rounded-xl border border-gold/30 px-4 py-3 text-ivory transition-colors has-checked:border-gold-bright has-checked:bg-gold/15"
+                      className="flex cursor-pointer items-center gap-3 rounded-xl border border-gold/30 bg-white/60 px-4 py-3 text-ink transition-colors has-checked:border-gold-deep has-checked:bg-gold/10"
                     >
                       <input
                         type="radio"
@@ -137,7 +125,7 @@ export function RsvpBoard({ copy, guestName }: Props) {
                         value={value}
                         checked={attendance === value}
                         onChange={() => setAttendance(value)}
-                        className="accent-gold-bright"
+                        className="accent-gold-deep"
                       />
                       {value === "yes" ? copy.rsvpYes : copy.rsvpNo}
                     </label>
@@ -147,7 +135,7 @@ export function RsvpBoard({ copy, guestName }: Props) {
 
               {attendance === "yes" ? (
                 <div>
-                  <label htmlFor="guests" className="font-sans text-[11px] tracking-[0.22em] text-gold-bright/80 uppercase">
+                  <label htmlFor="guests" className="font-sans text-[11px] tracking-[0.22em] text-gold-deep uppercase">
                     {copy.rsvpGuests}
                   </label>
                   <input
@@ -157,11 +145,11 @@ export function RsvpBoard({ copy, guestName }: Props) {
                     min={1}
                     max={20}
                     defaultValue={1}
-                    className="field-dark"
+                    className="field-light"
                     aria-invalid={Boolean(rsvpErrors.guests)}
                     aria-describedby="guests-hint"
                   />
-                  <p id="guests-hint" className="mt-1 text-sm text-ivory/60">
+                  <p id="guests-hint" className="mt-1 text-sm text-ink-soft">
                     {copy.guestsHint}
                   </p>
                 </div>
@@ -170,14 +158,14 @@ export function RsvpBoard({ copy, guestName }: Props) {
               )}
 
               <div>
-                <label htmlFor="message" className="font-sans text-[11px] tracking-[0.22em] text-gold-bright/80 uppercase">
+                <label htmlFor="message" className="font-sans text-[11px] tracking-[0.22em] text-gold-deep uppercase">
                   {copy.rsvpMessage}
                 </label>
-                <textarea id="message" name="message" rows={3} className="field-dark resize-y" />
+                <textarea id="message" name="message" rows={3} className="field-light resize-y" />
               </div>
 
               {sendError ? (
-                <p className="text-sm text-rose-300" role="alert">
+                <p className="text-sm text-burgundy" role="alert">
                   {copy.rsvpSendError}
                 </p>
               ) : null}
