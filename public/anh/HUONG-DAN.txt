@@ -1,0 +1,16 @@
+Thả ảnh cưới vào folder này, GIỮ NGUYÊN TÊN FILE.
+Xong rồi refresh trình duyệt (Cmd+Shift+R).
+
+anh1.jpg               Màn hình đầu — Save the date (hiện đủ ảnh, không cắt)
+chu-re.jpg             Ảnh chú rể
+co-dau.jpg             Ảnh cô dâu
+dao-buoc.jpg           Album
+hai-ban-tay.jpg        Album
+le-cuoi.jpg            Album
+ban-tiec.jpg           Album
+nu-hon.jpg             Album + lì xì
+hoa-cuoi.jpg           Album
+dem.jpg                Ảnh nền cuối trang
+
+Nên dùng JPG hoặc PNG. Không đổi tên, không thêm file mới.
+Nếu điện thoại đang hiện ảnh cũ: Cmd+Shift+R hoặc xóa cache.
